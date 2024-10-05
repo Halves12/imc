@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros de IMC</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registros de IMC</h1>
+        <table id="imcTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Peso (kg)</th>
+                    <th>Altura (m)</th>
+                    <th>IMC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os registros de IMC serão inseridos aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Fazer uma requisição GET para a API e obter os registros de IMC
+        fetch('/imc')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('#imcTable tbody');
+                data.forEach(registro => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${registro.id}</td>
+                        <td>${registro.nome}</td>
+                        <td>${registro.peso}</td>
+                        <td>${registro.altura}</td>
+                        <td>${registro.imc}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Erro ao obter os registros de IMC:', error));
+
+            
+    </script>
+</body>
+</html>
+
+
